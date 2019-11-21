@@ -95,25 +95,3 @@ define Package/smartmontools/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/smartctl $(1)/usr/sbin/
 endef
-
-define Package/smartd/install
-	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/smartd $(1)/usr/sbin/
-	$(INSTALL_DIR) $(1)/etc
-	$(INSTALL_DATA) ./files/smartd.conf $(1)/etc/
-	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/smartd.init $(1)/etc/init.d/smartd
-endef
-
-define Package/smartmontools-drivedb/install
-	$(INSTALL_DIR) $(1)/usr/share/smartmontools/
-	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/share/smartmontools/drivedb.h $(1)/usr/share/smartmontools/
-endef
-
-define Package/smartd/conffiles
-/etc/smartd.conf
-endef
-
-$(eval $(call BuildPackage,smartmontools))
-$(eval $(call BuildPackage,smartd))
-$(eval $(call BuildPackage,smartmontools-drivedb))
